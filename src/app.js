@@ -14,6 +14,22 @@ function getTodos(){
     fetch(url)
     .then(response => response.json())
     .then(result => {
-        console.log(result)
+        state.todos=result
+        render();
     });
 };
+
+function render(){
+    let rows ='';
+    state.todos.forEach((todo) => {
+        rows += `
+        <tr>
+            <td> ${todo.id}</td>
+            <td> ${todo.name}</td>
+            <td> ${todo.ready}</td>
+        </tr>
+        `;   
+    });
+
+    doc.tbody.innerHTML = rows;
+}
